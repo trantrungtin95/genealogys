@@ -1,0 +1,42 @@
+<h1>Genealogy Diagram:</h1>
+<%= Gon::Base.render_data %>
+<%= link_to "Members", user_family_members_path(@current_user, @family)%>
+<div id="current-user" data-id="<%= @current_user.id %>"></div>
+<div id="family" data-id="<%= @family.id %>"></div>
+<div id="first-member" data-id="<%= @first_member.id %>" data-name="<%= @first_member.name %>" data-dateofbirth="<%= @first_member.date_of_birth %>"></div>
+<% @members.each do |member| %>
+    <% if Relationship.find_by_relative_id(member.id).nil? &&  Relationship.find_by_member_id(member.id).nil? %>
+        <div class="members" data-class="<%= member.id %>" data-name="<%= member.name %>" data-dateofbirth="<%= member.date_of_birth %>"></div>
+    <% end %>
+<% end %>
+<div id="chart-container"></div>
+<script>
+$(document).ready(function() {
+    console.log(gon.result)
+});
+$('.members').each(function() {
+    var name = this.dataset.name
+        title = this.dataset.dateofbirth
+    window.ds = {
+        'name': `${name}`,
+        'title': `${title}`,
+    }
+    var oc = $('#chart-container').orgchart({
+        'data' : window.ds,
+        'nodeContent': 'title'
+    });
+});
+$(document).ready(function(){
+    var name = $('#first-member').data('name')
+        title = $('#first-member').data('dateofbirth')
+    window.ds = {
+        'name': `${name}`,
+        'title': `${title}`,
+        'children': gon.result
+    }
+    var oc = $('#chart-container').orgchart({
+        'data' : window.ds,
+        'nodeContent': 'title'
+    });
+});
+</script>

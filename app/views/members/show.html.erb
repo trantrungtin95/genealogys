@@ -1,0 +1,26 @@
+<div>
+    <h5 style="display:inline">Name: </h5><strong><i><%= @member.name %></i></strong>
+</div>
+<div>
+    <h5 style="display:inline">Date of Birth: </h5><strong><i><%= @member.date_of_birth %></i></strong>
+</div>
+<div>
+    <h5 style="display:inline">Parent: </h5>
+    <% Relationship.where(relationship_name: "parent", relative_id: @member.id).each do |parent|%>
+        <strong><i><%= parent.member.name %></i></strong>
+    <% end %>
+</div>
+<div>
+    <h5 style="display:inline">Couple: </h5>
+    <% Relationship.where(relationship_name: "couple", relative_id: @member.id).each do |couple|%>
+        <strong><i><%= couple.member.name %></i></strong>
+    <% end %>
+</div>
+<div>
+    <h5 style="display:inline">Children: </h5>
+    <% Relationship.where(relationship_name: "parent", member_id: @member.id).each do |children|%>
+        <strong><i><%= Member.find(children.relative_id).name %></i></strong>
+    <% end %>
+</div>
+<div><%= link_to "Create Relationship", new_relationship_user_family_member_path(@current_user, @family, @member) %></div>
+<div><%= link_to "Back", user_family_members_path(@current_user, @family)%></div>

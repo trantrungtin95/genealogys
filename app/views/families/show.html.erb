@@ -1,0 +1,9 @@
+<div>
+    <strong>Surname: </strong><%= @family.surname%>
+</div>
+<div>
+    <strong>Address: </strong><%= @family.address%>
+</div>
+<div><%= link_to "Member", user_family_members_path(@current_user, @family)%></div>
+<div><%= link_to "Genealogy Diagram", genealogy_diagram_user_family_path(@current_user, @family) %></div>
+<div><%= link_to "Back", user_families_path(@current_user)%></div>

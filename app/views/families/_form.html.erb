@@ -1,0 +1,26 @@
+<%= form_for( [@current_user, @family], local: true) do |form| %>
+  <fieldset style='width: 295px'>
+    <legend>Enter Family Line Information</legend>
+
+    <%= form.hidden_field :user_id, value: @current_user.id%>
+
+    <div class="field">
+      <%= form.label :surname, 'Surname' %>
+      <%= form.text_field :surname, :size => 40 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :address, 'Address' %>
+      <%= form.text_field :address, :size => 80 %>
+    </div> 
+
+    <div class="field">
+      <%= form.label :infor, 'Information' %>
+      <%= form.text_field :infor, :size => 80 %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  </fieldset>
+<% end %>

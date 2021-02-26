@@ -1,0 +1,13 @@
+<h4>List Families:</h4>
+<table>
+    <tr>
+        <th>Surname:</th>
+        <th>Adress:</th>
+    </tr>
+    <% @families.each do |family| %>
+        <tr>
+            <td><%= link_to family.surname, user_family_path( @current_user, family)%></td>
+            <td><%= family.address%></td>
+        </tr>
+    <% end if !@families.nil?%>
+</table>

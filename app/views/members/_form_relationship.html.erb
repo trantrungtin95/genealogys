@@ -1,0 +1,19 @@
+<form action="/users/<%= @current_user.id %>/families/<%= @family.id %>/members/<%= @member.id %>/create_relationship">
+    <div>
+        <label for="member_id">Choose a Member:</label>
+        <select name="member_id" id="member_id">
+            <% @members.each do |member| %>
+                <option value="<%= member.id %>"><%= member.name %></option>
+            <% end %>
+        </select>
+    </div>
+    <div>
+        <label for="relationship_name">Choose a Relationship:</label>
+        <select name="relationship_name" id="relationship_name">
+            <option value="parent">Parent</option>
+            <option value="couple">Couple</option>
+        </select>
+    </div>
+    <br><br>
+    <input type="submit" value="Submit">
+</form>

@@ -1,0 +1,21 @@
+<%= form_for( [@current_user, @family, @member], local: true) do |form| %>
+  <fieldset style='width: 295px'>
+    <legend>Enter Member Information</legend>
+
+    <%= form.hidden_field :family_id, value: @family.id%>
+
+    <div class="field">
+      <%= form.label :name, 'Name' %>
+      <%= form.text_field :name, :size => 40 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :date_of_birth, 'Date of Birth' %>
+      <%= form.date_field :date_of_birth %>
+    </div> 
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  </fieldset>
+<% end %>
