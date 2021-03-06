@@ -28,18 +28,20 @@ class FamiliesController < ApplicationController
 
     def genealogy_diagram
         @members = @family.members
-        result = []
-        @first_member = @members.order('date_of_birth asc').first
-        children = @first_member.relationships.where(relationship_name: "parent").map{|e| Member.find(e.relative_id)}
-        children.each do |child|
-            node = { 
-                name: "#{child.name}", 
-                title: "#{child.date_of_birth}",
-                children: child.of_children   
-            }
-            result.push(node)
+        if !@members.empty?
+            result = []
+            @first_member = @members.order('date_of_birth asc').first
+            children = @first_member.relationships.where(relationship_name: "parent").map{|e| Member.find(e.relative_id)}
+            children.each do |child|
+                node = { 
+                    name: "#{child.name}", 
+                    title: "#{child.date_of_birth}",
+                    children: child.of_children   
+                }
+                result.push(node)
+            end
+            gon.result = result
         end
-        gon.result = result
     end
 
     private

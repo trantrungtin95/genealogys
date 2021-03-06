@@ -3,7 +3,9 @@
 <%= link_to "Members", user_family_members_path(@current_user, @family)%>
 <div id="current-user" data-id="<%= @current_user.id %>"></div>
 <div id="family" data-id="<%= @family.id %>"></div>
-<div id="first-member" data-id="<%= @first_member.id %>" data-name="<%= @first_member.name %>" data-dateofbirth="<%= @first_member.date_of_birth %>"></div>
+<% if !@first_member.nil? %>
+    <div id="first-member" data-id="<%= @first_member.id %>" data-name="<%= @first_member.name %>" data-dateofbirth="<%= @first_member.date_of_birth %>"></div>
+<% end %>
 <% @members.each do |member| %>
     <% if Relationship.find_by_relative_id(member.id).nil? &&  Relationship.find_by_member_id(member.id).nil? %>
         <div class="members" data-class="<%= member.id %>" data-name="<%= member.name %>" data-dateofbirth="<%= member.date_of_birth %>"></div>
