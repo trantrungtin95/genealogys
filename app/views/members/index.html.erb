@@ -3,4 +3,5 @@
     <div><%= link_to member.name, user_family_member_path(@current_user, @family, member) %></div>
 <% end %>
 <%= link_to "New Member", new_user_family_member_path(@current_user, @family) %>
+<div><%= link_to "Genealogy Diagram", genealogy_diagram_user_family_path(@current_user, @family) %></div>
 <div><%= link_to "Back", user_family_path( @current_user, @family) %></div>
